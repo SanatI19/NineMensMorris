@@ -168,6 +168,8 @@
     <script>
 
         let turnColor = "white";
+        let placements = 0;
+
 
         function toggleColor() {
             if (turnColor == "white") {
@@ -178,21 +180,30 @@
             }
         }
 
+        const emptyButtonHandler = function() {
+            let correspondingElementIndex = this.getAttribute('data-index');
+
+            // Find the corresponding element using the index
+            let correspondingElement = document.querySelector(`.piece[data-index="${correspondingElementIndex}"]`);
+
+            correspondingElement.style.display = "inline";
+            correspondingElement.style.backgroundColor = turnColor;
+            toggleColor();
+            placements++;
+            if (placements >= 18) {
+                removeEmptyButtonListeners();
+            }
+        }
+
         document.querySelectorAll('.circle[data-type="button"]').forEach(button => {
-            button.addEventListener('click', function() {
-                // Get the index or identifier for the corresponding element
-                let correspondingElementIndex = this.getAttribute('data-index');
-
-                // Find the corresponding element using the index
-                let correspondingElement = document.querySelector(`.piece[data-index="${correspondingElementIndex}"]`);
-
-                correspondingElement.style.display = "inline";
-                correspondingElement.style.backgroundColor = turnColor;
-                toggleColor();
-                // Now you can do something with the corresponding element
-                // console.log(`Button clicked. Corresponding element:`, correspondingElement);
+            button.addEventListener('click', emptyButtonHandler);
             });
-        });
+
+        function removeEmptyButtonListeners() {
+            document.querySelectorAll('.circle[data-type="button"]').forEach(button => {
+                button.removeEventListener('click', emptyButtonHandler);
+            })
+        }
 
     </script>
 </body>
