@@ -18,6 +18,14 @@
             height:100vh;
             background-color: grey;
         }
+        .instructions {
+            position: fixed;
+            top: 0vh;
+            left: 50vw;
+            /* text-align: center; */
+            /* width: 100% */
+            /* transform: translate(-50vw,-50vh); */
+        }
         .line-horizontal-left {
             position: fixed;
             top: 50vh;
@@ -80,6 +88,7 @@
 </head>
 <body>
     <div class = "background"></div>
+    <p id = "topText" class = "instructions">White, please place a piece</p>
     <div class = "square" style = "width:min(80vw,80vh);height:min(80vw,80vh);"></div>
     <div class = "square" style = "width:min(55vw,55vh);height:min(55vw,55vh);"></div>
     <div class = "square" style = "width:min(30vw,30vh);height:min(30vw,30vh);"></div>
@@ -93,36 +102,36 @@
 
     <!-- Outer square -->
     <div class = "circle" data-index = "1" data-type = "button" style = "position:fixed; top:max(10vh, calc(50vh - 40vw)); left: max(calc(50vw - 40vh), calc(10vw)); transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
-    <div class = "circle" data-index = "2" data-type = "button" style = "position:fixed; bottom:max(10vh, calc(50vh - 40vw)); left: max(calc(50vw - 40vh), calc(10vw)); transform:translate(max(-2.5vw,-2.5vh),min(2.5vh,2.5vw))"></div>
-    <div class = "circle" data-index = "3" data-type = "button" style = "position:fixed; top:50vh; left: max(calc(50vw - 40vh), calc(10vw)); transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" data-index = "3" data-type = "button" style = "position:fixed; bottom:max(10vh, calc(50vh - 40vw)); left: max(calc(50vw - 40vh), calc(10vw)); transform:translate(max(-2.5vw,-2.5vh),min(2.5vh,2.5vw))"></div>
+    <div class = "circle" data-index = "2" data-type = "button" style = "position:fixed; top:50vh; left: max(calc(50vw - 40vh), calc(10vw)); transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
 
     <div class = "circle" data-index = "4" data-type = "button" style = "position:fixed; top:max(10vh, calc(50vh - 40vw)); right: max(calc(50vw - 40vh), calc(10vw)); transform:translate(min(2.5vw,2.5vh),max(-2.5vh,-2.5vw))"></div>
-    <div class = "circle" data-index = "5" data-type = "button" style = "position:fixed; bottom:max(10vh, calc(50vh - 40vw)); right: max(calc(50vw - 40vh), calc(10vw)); transform:translate(min(2.5vw,2.5vh),min(2.5vh,2.5vw))"></div>
-    <div class = "circle" data-index = "6" data-type = "button" style = "position:fixed; top:50vh; right: max(calc(50vw - 40vh), calc(10vw)); transform:translate(min(2.5vw,2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" data-index = "6" data-type = "button" style = "position:fixed; bottom:max(10vh, calc(50vh - 40vw)); right: max(calc(50vw - 40vh), calc(10vw)); transform:translate(min(2.5vw,2.5vh),min(2.5vh,2.5vw))"></div>
+    <div class = "circle" data-index = "5" data-type = "button" style = "position:fixed; top:50vh; right: max(calc(50vw - 40vh), calc(10vw)); transform:translate(min(2.5vw,2.5vh),max(-2.5vh,-2.5vw))"></div>
 
     <div class = "circle" data-index = "7" data-type = "button" style = "position:fixed; top:max(10vh, calc(50vh - 40vw)); left: 50vw; transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
     <div class = "circle" data-index = "8"data-type = "button" style = "position:fixed; bottom:max(10vh, calc(50vh - 40vw)); left: 50vw; transform:translate(max(-2.5vw,-2.5vh),min(2.5vh,2.5vw))"></div>
 
 <!-- middle square -->
     <div class = "circle" data-index = "9" data-type = "button" style = "position:fixed; top:max(22.5vh, calc(50vh - 27.5vw)); left: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
-    <div class = "circle" data-index = "10" data-type = "button" style = "position:fixed; bottom:max(22.5vh, calc(50vh - 27.5vw)); left: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(max(-2.5vw,-2.5vh),min(2.5vh,2.5vw))"></div>
-    <div class = "circle" data-index = "11" data-type = "button" style = "position:fixed; top:50vh; left: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" data-index = "11" data-type = "button" style = "position:fixed; bottom:max(22.5vh, calc(50vh - 27.5vw)); left: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(max(-2.5vw,-2.5vh),min(2.5vh,2.5vw))"></div>
+    <div class = "circle" data-index = "10" data-type = "button" style = "position:fixed; top:50vh; left: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
 
     <div class = "circle" data-index = "12" data-type = "button" style = "position:fixed; top:max(22.5vh, calc(50vh - 27.5vw)); right: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(min(2.5vw,2.5vh),max(-2.5vh,-2.5vw))"></div>
-    <div class = "circle" data-index = "13" data-type = "button" style = "position:fixed; bottom:max(22.5vh, calc(50vh - 27.5vw)); right: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(min(2.5vw,2.5vh),min(2.5vh,2.5vw))"></div>
-    <div class = "circle" data-index = "14" data-type = "button" style = "position:fixed; top:50vh; right: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(min(2.5vw,2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" data-index = "14" data-type = "button" style = "position:fixed; bottom:max(22.5vh, calc(50vh - 27.5vw)); right: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(min(2.5vw,2.5vh),min(2.5vh,2.5vw))"></div>
+    <div class = "circle" data-index = "13" data-type = "button" style = "position:fixed; top:50vh; right: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(min(2.5vw,2.5vh),max(-2.5vh,-2.5vw))"></div>
 
     <div class = "circle" data-index = "15" data-type = "button" style = "position:fixed; top:max(22.5vh, calc(50vh - 27.5vw)); left: 50vw; transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
     <div class = "circle" data-index = "16" data-type = "button" style = "position:fixed; bottom:max(22.5vh, calc(50vh - 27.5vw)); left: 50vw; transform:translate(max(-2.5vw,-2.5vh),min(2.5vh,2.5vw))"></div>
 
     <!-- inner square -->
     <div class = "circle" data-index = "17" data-type = "button" style = "position:fixed; top:max(35vh, calc(50vh - 15vw)); left: max(calc(50vw - 15vh), calc(35vw)); transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
-    <div class = "circle" data-index = "18" data-type = "button"style = "position:fixed; bottom:max(35vh, calc(50vh - 15vw)); left: max(calc(50vw - 15vh), calc(35vw)); transform:translate(max(-2.5vw,-2.5vh),min(2.5vh,2.5vw))"></div>
-    <div class = "circle" data-index = "19" data-type = "button" style = "position:fixed; top:50vh; left: max(calc(50vw - 15vh), calc(35vw)); transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" data-index = "19" data-type = "button"style = "position:fixed; bottom:max(35vh, calc(50vh - 15vw)); left: max(calc(50vw - 15vh), calc(35vw)); transform:translate(max(-2.5vw,-2.5vh),min(2.5vh,2.5vw))"></div>
+    <div class = "circle" data-index = "18" data-type = "button" style = "position:fixed; top:50vh; left: max(calc(50vw - 15vh), calc(35vw)); transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
 
     <div class = "circle" data-index = "20" data-type = "button" style = "position:fixed; top:max(35vh, calc(50vh - 15vw)); right: max(calc(50vw - 15vh), calc(35vw)); transform:translate(min(2.5vw,2.5vh),max(-2.5vh,-2.5vw))"></div>
-    <div class = "circle" data-index = "21" data-type = "button" style = "position:fixed; bottom:max(35vh, calc(50vh - 15vw)); right: max(calc(50vw - 15vh), calc(35vw)); transform:translate(min(2.5vw,2.5vh),min(2.5vh,2.5vw))"></div>
-    <div class = "circle" data-index = "22" data-type = "button" style = "position:fixed; top:50vh; right: max(calc(50vw - 15vh), calc(35vw)); transform:translate(min(2.5vw,2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" data-index = "22" data-type = "button" style = "position:fixed; bottom:max(35vh, calc(50vh - 15vw)); right: max(calc(50vw - 15vh), calc(35vw)); transform:translate(min(2.5vw,2.5vh),min(2.5vh,2.5vw))"></div>
+    <div class = "circle" data-index = "21" data-type = "button" style = "position:fixed; top:50vh; right: max(calc(50vw - 15vh), calc(35vw)); transform:translate(min(2.5vw,2.5vh),max(-2.5vh,-2.5vw))"></div>
 
     <div class = "circle" data-index = "23" data-type = "button" style = "position:fixed; top:max(35vh, calc(50vh - 15vw)); left: 50vw; transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
     <div class = "circle" data-index = "24" data-type = "button" style = "position:fixed; bottom:max(35vh, calc(50vh - 15vw)); left: 50vw; transform:translate(max(-2.5vw,-2.5vh),min(2.5vh,2.5vw))"></div>
@@ -130,51 +139,56 @@
 
         <!-- Outer square -->
     <div class = "piece" data-index = "1" style = "position:fixed; top:max(10vh, calc(50vh - 40vw)); left: max(calc(50vw - 40vh), calc(10vw)); transform:translate(max(-4vw,-4vh),max(-4vh,-4vw))"></div>
-    <div class = "piece" data-index = "2" style = "position:fixed; bottom:max(10vh, calc(50vh - 40vw)); left: max(calc(50vw - 40vh), calc(10vw)); transform:translate(max(-4vw,-4vh),min(4vh,4vw))"></div>
-    <div class = "piece" data-index = "3" style = "position:fixed; top:50vh; left: max(calc(50vw - 40vh), calc(10vw)); transform:translate(max(-4vw,-4vh),max(-4vh,-4vw))"></div>
+    <div class = "piece" data-index = "3" style = "position:fixed; bottom:max(10vh, calc(50vh - 40vw)); left: max(calc(50vw - 40vh), calc(10vw)); transform:translate(max(-4vw,-4vh),min(4vh,4vw))"></div>
+    <div class = "piece" data-index = "2" style = "position:fixed; top:50vh; left: max(calc(50vw - 40vh), calc(10vw)); transform:translate(max(-4vw,-4vh),max(-4vh,-4vw))"></div>
 
     <div class = "piece" data-index = "4" style = "position:fixed; top:max(10vh, calc(50vh - 40vw)); right: max(calc(50vw - 40vh), calc(10vw)); transform:translate(min(4vw,4vh),max(-4vh,-4vw))"></div>
-    <div class = "piece" data-index = "5" style = "position:fixed; bottom:max(10vh, calc(50vh - 40vw)); right: max(calc(50vw - 40vh), calc(10vw)); transform:translate(min(4vw,4vh),min(4vh,4vw))"></div>
-    <div class = "piece" data-index = "6" style = "position:fixed; top:50vh; right: max(calc(50vw - 40vh), calc(10vw)); transform:translate(min(4vw,4vh),max(-4vh,-4vw))"></div>
+    <div class = "piece" data-index = "6" style = "position:fixed; bottom:max(10vh, calc(50vh - 40vw)); right: max(calc(50vw - 40vh), calc(10vw)); transform:translate(min(4vw,4vh),min(4vh,4vw))"></div>
+    <div class = "piece" data-index = "5" style = "position:fixed; top:50vh; right: max(calc(50vw - 40vh), calc(10vw)); transform:translate(min(4vw,4vh),max(-4vh,-4vw))"></div>
 
     <div class = "piece" data-index = "7" style = "position:fixed; top:max(10vh, calc(50vh - 40vw)); left: 50vw; transform:translate(max(-4vw,-4vh),max(-4vh,-4vw))"></div>
     <div class = "piece" data-index = "8"style = "position:fixed; bottom:max(10vh, calc(50vh - 40vw)); left: 50vw; transform:translate(max(-4vw,-4vh),min(4vh,4vw))"></div>
 
 <!-- middle square -->
     <div class = "piece" data-index = "9"style = "position:fixed; top:max(22.5vh, calc(50vh - 27.5vw)); left: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(max(-4vw,-4vh),max(-4vh,-4vw))"></div>
-    <div class = "piece" data-index = "10"style = "position:fixed; bottom:max(22.5vh, calc(50vh - 27.5vw)); left: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(max(-4vw,-4vh),min(4vh,4vw))"></div>
-    <div class = "piece" data-index = "11"style = "position:fixed; top:50vh; left: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(max(-4vw,-4vh),max(-4vh,-4vw))"></div>
+    <div class = "piece" data-index = "11"style = "position:fixed; bottom:max(22.5vh, calc(50vh - 27.5vw)); left: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(max(-4vw,-4vh),min(4vh,4vw))"></div>
+    <div class = "piece" data-index = "10"style = "position:fixed; top:50vh; left: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(max(-4vw,-4vh),max(-4vh,-4vw))"></div>
 
     <div class = "piece" data-index = "12" style = "position:fixed; top:max(22.5vh, calc(50vh - 27.5vw)); right: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(min(4vw,4vh),max(-4vh,-4vw))"></div>
-    <div class = "piece" data-index = "13" style = "position:fixed; bottom:max(22.5vh, calc(50vh - 27.5vw)); right: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(min(4vw,4vh),min(4vh,4vw))"></div>
-    <div class = "piece" data-index = "14"style = "position:fixed; top:50vh; right: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(min(4vw,4vh),max(-4vh,-4vw))"></div>
+    <div class = "piece" data-index = "14" style = "position:fixed; bottom:max(22.5vh, calc(50vh - 27.5vw)); right: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(min(4vw,4vh),min(4vh,4vw))"></div>
+    <div class = "piece" data-index = "13"style = "position:fixed; top:50vh; right: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(min(4vw,4vh),max(-4vh,-4vw))"></div>
 
     <div class = "piece" data-index = "15"style = "position:fixed; top:max(22.5vh, calc(50vh - 27.5vw)); left: 50vw; transform:translate(max(-4vw,-4vh),max(-4vh,-4vw))"></div>
     <div class = "piece" data-index = "16"style = "position:fixed; bottom:max(22.5vh, calc(50vh - 27.5vw)); left: 50vw; transform:translate(max(-4vw,-4vh),min(4vh,4vw))"></div>
 
     <!-- inner square -->
     <div class = "piece" data-index = "17" style = "position:fixed; top:max(35vh, calc(50vh - 15vw)); left: max(calc(50vw - 15vh), calc(35vw)); transform:translate(max(-4vw,-4vh),max(-4vh,-4vw))"></div>
-    <div class = "piece" data-index = "18" style = "position:fixed; bottom:max(35vh, calc(50vh - 15vw)); left: max(calc(50vw - 15vh), calc(35vw)); transform:translate(max(-4vw,-4vh),min(4vh,4vw))"></div>
-    <div class = "piece" data-index = "19" style = "position:fixed; top:50vh; left: max(calc(50vw - 15vh), calc(35vw)); transform:translate(max(-4vw,-4vh),max(-4vh,-4vw))"></div>
+    <div class = "piece" data-index = "19" style = "position:fixed; bottom:max(35vh, calc(50vh - 15vw)); left: max(calc(50vw - 15vh), calc(35vw)); transform:translate(max(-4vw,-4vh),min(4vh,4vw))"></div>
+    <div class = "piece" data-index = "18" style = "position:fixed; top:50vh; left: max(calc(50vw - 15vh), calc(35vw)); transform:translate(max(-4vw,-4vh),max(-4vh,-4vw))"></div>
 
     <div class = "piece" data-index = "20" style = "position:fixed; top:max(35vh, calc(50vh - 15vw)); right: max(calc(50vw - 15vh), calc(35vw)); transform:translate(min(4vw,4vh),max(-4vh,-4vw))"></div>
-    <div class = "piece" data-index = "21" style = "position:fixed; bottom:max(35vh, calc(50vh - 15vw)); right: max(calc(50vw - 15vh), calc(35vw)); transform:translate(min(4vw,4vh),min(4vh,4vw))"></div>
-    <div class = "piece" data-index = "22" style = "position:fixed; top:50vh; right: max(calc(50vw - 15vh), calc(35vw)); transform:translate(min(4vw,4vh),max(-4vh,-4vw))"></div>
+    <div class = "piece" data-index = "22" style = "position:fixed; bottom:max(35vh, calc(50vh - 15vw)); right: max(calc(50vw - 15vh), calc(35vw)); transform:translate(min(4vw,4vh),min(4vh,4vw))"></div>
+    <div class = "piece" data-index = "21" style = "position:fixed; top:50vh; right: max(calc(50vw - 15vh), calc(35vw)); transform:translate(min(4vw,4vh),max(-4vh,-4vw))"></div>
 
     <div class = "piece" data-index = "23" style = "position:fixed; top:max(35vh, calc(50vh - 15vw)); left: 50vw; transform:translate(max(-4vw,-4vh),max(-4vh,-4vw))"></div>
     <div class = "piece" data-index = "24" style = "position:fixed; bottom:max(35vh, calc(50vh - 15vw)); left: 50vw; transform:translate(max(-4vw,-4vh),min(4vh,4vw))"></div>
 
     <script src="morris.js"></script>
     <script>
-        const correctThrees = [[1,2,3],[1,4,7],[2,10,18],[3,6,8],[4,5,6],[5,13,20],[7,15,23],[8,16,24],[9,10,11],[9,12,15],[11,14,16],[12,13,14],[17,18,19],[17,20,23],[19,22,24],[20,21,22]];
+        const topText = document.getElementById("topText");
+        const correctThrees = [[1,2,3],[1,4,7],[2,10,18],[3,6,8],[4,5,6],[5,13,21],[7,15,23],[8,16,24],[9,10,11],[9,12,15],[11,14,16],[12,13,14],[17,18,19],[17,20,23],[19,22,24],[20,21,22]];
+        const adjacentSpaces = [[2,7],[1,3,10],[2,8],[5,7],[4,6,13],[5,8],[1,4,15],[3,6,16],[10,15],[9,11,18],[10,16],[13,15],[12,14,21],[13,16],[7,9,12,23],[8,11,14,24],[18,23],[10,17,19],[18,24],[21,23],[13,20,22],[21,24],[15,17,20],[16,19,22]];
         let turnColor = "white";
         let placements = 0;
 
         let whitePositions = []
         let blackPositions = []
 
-        let whiteThrees = 0;
-        let blacktThrees = 0;
+        let whiteThreesNum = 0;
+        let blackThreesNum = 0;
+
+        let blackThreesIndices = [];
+        let whiteThreesIndices = [];
 
         let whiteNewThrees = 0;
         let blackNewThrees = 0;
@@ -188,11 +202,17 @@
             }
         }
 
-        function calcThrees(array) {
+        function calcThrees(array,color) {
             let inArray;
             let numThrees = 0;
             let val;
-            for (three in correctThrees) {
+            if (color == "white") {
+                whiteThreesIndices = [];
+            }
+            else {
+                blackThreesIndices = [];
+            }
+            for (three of correctThrees) {;
                 let j = 0;
                 for (let i = 0; i <3; i++) {
                     val = three[i];
@@ -217,62 +237,220 @@
                 }
                 if (inArray) {
                     numThrees++;
+                    for (x of three) {
+                        if (color == "white") {
+                            if (!whiteThreesIndices.includes(x)) {
+                                whiteThreesIndices.push(x)
+                            }
+                        }
+                        else {
+                            if (!blackThreesIndices.includes(x)) {
+                                blackThreesIndices.push(x)
+                            }
+                        }
+                    }
                 }
             }
+            // console.log(whiteThreesIndices)
+            // console.log(blackThreesIndices)
             return numThrees;
         }
 
+        function sortAdditionArray(array) {
+            let lastElement = array.pop()
+            let i = 0;
+            while (i < array.length) {
+                if (array[i] > lastElement) {
+                    break
+                }
+                i++;
+            }
+            array.splice(i, 0,lastElement);
+            return array;
+        }
 
+        async function removeOpponentChip(color) {
+            const allPieces = document.querySelectorAll('.piece');
+            let threePieces;
+            if (color == "white") {
+                threePieces = whiteThreesIndices;
+            }
+            else {
+                threePieces = blackThreesIndices;
+            }
+            const piecesOfColor = Array.from(allPieces).filter(element => {
+                return element.style.backgroundColor === color
+            })
+            const allowablePiecesOfColor = Array.from(piecesOfColor).filter(element => !threePieces.includes(Number(element[data-index])))
+
+    
+            allowablePiecesOfColor.forEach(button => {
+                button.addEventListener('click',removeChipButtonHandler);
+                console.log('added button event listener')
+            })
+        }
+
+        const removeChipButtonHandler = (resolve, color) => (event) => {
+            event.target.style.display = "none";
+            let position = Number(event.target.dataset.index);
+            if (color == "white") {
+                whitePositions.splice(whitePositions.indexOf(position),1)
+            }
+            else {
+                blackPositions.splice(blackPositions.indexOf(position),1)
+            }
+            document.querySelectorAll('.piece').forEach(button => {
+                button.removeEventListener('click', button._handler);
+            });
+            resolve();
+            console.log('button pressed');
+        }
+
+        async function awaitRemoval(color) {
+            topText.innerHTML = turnColor.charAt(0).toUpperCase()+turnColor.slice(1) + ", please remove one of " + color + "'s pieces";
+
+            await (new Promise ((resolve) => {
+                let threePieces;
+                if (color == "white") {
+                    threePieces = whiteThreesIndices;
+                }
+                else {
+                    threePieces = blackThreesIndices;
+                }
+                const allPieces = document.querySelectorAll('.piece');
+                const piecesOfColor = Array.from(allPieces).filter(element => {
+                    return element.style.backgroundColor === color
+                })
+                const allowablePiecesOfColor = Array.from(piecesOfColor).filter(element => !threePieces.includes(Number(element.dataset.index)))
+                console.log(threePieces);
+
+                console.log(allowablePiecesOfColor.length);
+                if (allowablePiecesOfColor.length == 0) {
+                    resolve();
+                }
+                else {
+                    allowablePiecesOfColor.forEach(button => {
+                        button._handler = removeChipButtonHandler(resolve, color);
+                        button.addEventListener('click',button._handler);
+                        // button.addEventListener('click', removeChipButtonHandler(resolve), {once:true}
+                            // document.querySelectorAll('.piece').forEach(btn => {
+                            //     btn.removeEventListener('click', removeChipButtonHandler);
+                            // });
+                            // this.style.display = "none";
+                            // resolve();
+                            // console.log('button pressed');
+                        // );
+                        // console.log('added button event listener')
+                    })
+                }
+            }))
+        }
+
+        // const removeChipButtonHandler = async function() {
+
+        // }
+
+        function removeRemovalChipEventListeners() {
+            document.querySelectorAll('.piece').forEach(button => {
+                button.removeEventListener('click', removeChipButtonHandler);
+            })
+        }
         //test the calc threes function
-        const array = [1,2,3];
-        let val = calcThrees(array);
-        console.log(val)
+        // const array = [1,2,3];
+        // let val = calcThrees(array);
+        // console.log(val)
 
-        const emptyButtonHandler = function() {
+
+        const emptyButtonHandler = async function() {
+
             let correspondingElementIndex = this.getAttribute('data-index');
 
             // Find the corresponding element using the index
             let correspondingElement = document.querySelector(`.piece[data-index="${correspondingElementIndex}"]`);
 
-
+            let indexInt = Number(correspondingElementIndex);
 
             correspondingElement.style.display = "inline";
             correspondingElement.style.backgroundColor = turnColor;
 
-            if (turnColor == "white") {
-                whiteThrees = calcThrees(whitePositions);
-                whitePositions.push(correspondingElementIndex);
-                whiteNewThrees = calcThrees(whitePositions);
-                console.log(whitePositions)
-                if (whiteNewThrees > whiteThrees) {
-                    console.log("three in a row made")
-                    // removeOpponentChip(white);
-                }
-            }
-            else {
-                blackThrees = calcThrees(blackPositions);
-                blackPositions.push(correspondingElementIndex);
-                blackNewThrees = calcThrees(blackPositions);
-                console.log(blackPositions)
-                if (blackNewThrees > blackThrees) {
-                    // removeOpponentChip(black);
-                }
-            }
+            // await (new Promise((resolve) => {
 
+            
+                if (turnColor == "white") {
+                    whiteThrees = calcThrees(whitePositions,"white");
+                    whitePositions.push(indexInt);
+                    whitePositions = sortAdditionArray(whitePositions);
+                    whiteNewThrees = calcThrees(whitePositions,"white");
+                    console.log(whitePositions)
+                    if (whiteNewThrees > whiteThrees) {
+                        console.log("three in a row made by white")
+                        // needs to be async
+                        removeEmptyButtonListeners();
+                        await awaitRemoval("black");
+                        addEmptyButtonListeners();
+                    }
+                    else{
+                        // resolve();
+                    }
+                }
+                else {
+                    blackThrees = calcThrees(blackPositions,"black");
+                    blackPositions.push(indexInt);
+                    blackPositions = sortAdditionArray(blackPositions);
+                    blackNewThrees = calcThrees(blackPositions,"black");
+                    console.log(blackPositions)
+                    if (blackNewThrees > blackThrees) {
+                        console.log("three in a row made by black")
+                        // this needs to be async
+                        await awaitRemoval("white");
+                    }
+                    else {
+                        // resolve();
+                    }
+                }
+            // }));
+            console.log('resolved,continuing');
             toggleColor();
+            topText.innerHTML = turnColor.charAt(0).toUpperCase()+turnColor.slice(1) + ", please place a piece"
             placements++;
             if (placements >= 18) {
                 removeEmptyButtonListeners();
+                addSliding(white);
             }
         }
 
-        document.querySelectorAll('.circle[data-type="button"]').forEach(button => {
-            button.addEventListener('click', emptyButtonHandler);
-            });
+        function addEmptyButtonListeners() {
+            document.querySelectorAll('.circle[data-type="button"]').forEach(button => {
+                button.addEventListener('click', emptyButtonHandler);
+                });
+        }
+
+        addEmptyButtonListeners();
 
         function removeEmptyButtonListeners() {
             document.querySelectorAll('.circle[data-type="button"]').forEach(button => {
                 button.removeEventListener('click', emptyButtonHandler);
+            })
+        }
+
+        function addSliding(color) {
+            const pieces = document.querySelectorAll('.piece');
+            const coloredPieces = Array.from(pieces).filter(element => element.style.backgroundColor === color);
+            coloredPieces.forEach(button => {
+                button.addEventListener('click', slideButtonHandler);
+            })
+        }
+
+        function validSpacesAdd(index) {
+            const adjacent = adjacentSpaces(index-1);
+            const spaces = document.querySelectorAll('.circle');
+            const nearSpaces = Array.from(spaces).filter(adjacent.includes(spaces.dataset.index));
+            // const emptyNearSpaces = Array.from(nearSpaces).filter()
+        }
+
+        function removeSliding() {
+            document.querySelectorAll('.piece').forEach(button => {
+                button.removeEventListener('click', slideButtonHandler);
             })
         }
 
