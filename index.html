@@ -10,6 +10,14 @@
             text-align: center;
             margin-top: 50px;
         }
+        .background {
+            position: fixed;
+            top:0vh;
+            left:0vw;
+            width: 100vw;
+            height:100vh;
+            background-color: grey;
+        }
         .line-horizontal-left {
             position: fixed;
             top: 50vh;
@@ -46,7 +54,7 @@
             position: fixed;
             top: 50%;
             left: 50%;
-            background-color: lightcyan;
+            background-color: tan;
             border: 2px solid black;
             justify-content: center;
             align-items: center;
@@ -57,12 +65,21 @@
             width: min(5vh,5vw);
             height: min(5vh,5vw);
             border-radius: 50%;
-            background-color: black;
-            /* border: 2px solid black; */
+            background-color: rgb(194, 194, 194);
+            border: 1.5px solid black;
+        }
+        .piece {
+            position: fixed;
+            width: min(7vh,7vw);
+            height: min(7vh,7vw);
+            border-radius: 50%;
+            display: none;
+            /* background-color: black; */
         }
     </style>
 </head>
 <body>
+    <div class = "background"></div>
     <div class = "square" style = "width:min(80vw,80vh);height:min(80vw,80vh);"></div>
     <div class = "square" style = "width:min(55vw,55vh);height:min(55vw,55vh);"></div>
     <div class = "square" style = "width:min(30vw,30vh);height:min(30vw,30vh);"></div>
@@ -72,45 +89,110 @@
     <div class = "line-vertical-top"></div>
     <div class = "line-vertical-bottom"></div>
 
+
+
     <!-- Outer square -->
-    <div class = "circle" style = "position:fixed; top:max(10vh, calc(50vh - 40vw)); left: max(calc(50vw - 40vh), calc(10vw)); transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
-    <div class = "circle" style = "position:fixed; bottom:max(10vh, calc(50vh - 40vw)); left: max(calc(50vw - 40vh), calc(10vw)); transform:translate(max(-2.5vw,-2.5vh),min(2.5vh,2.5vw))"></div>
-    <div class = "circle" style = "position:fixed; top:50vh; left: max(calc(50vw - 40vh), calc(10vw)); transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" data-index = "1" data-type = "button" style = "position:fixed; top:max(10vh, calc(50vh - 40vw)); left: max(calc(50vw - 40vh), calc(10vw)); transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" data-index = "2" data-type = "button" style = "position:fixed; bottom:max(10vh, calc(50vh - 40vw)); left: max(calc(50vw - 40vh), calc(10vw)); transform:translate(max(-2.5vw,-2.5vh),min(2.5vh,2.5vw))"></div>
+    <div class = "circle" data-index = "3" data-type = "button" style = "position:fixed; top:50vh; left: max(calc(50vw - 40vh), calc(10vw)); transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
 
-    <div class = "circle" style = "position:fixed; top:max(10vh, calc(50vh - 40vw)); right: max(calc(50vw - 40vh), calc(10vw)); transform:translate(min(2.5vw,2.5vh),max(-2.5vh,-2.5vw))"></div>
-    <div class = "circle" style = "position:fixed; bottom:max(10vh, calc(50vh - 40vw)); right: max(calc(50vw - 40vh), calc(10vw)); transform:translate(min(2.5vw,2.5vh),min(2.5vh,2.5vw))"></div>
-    <div class = "circle" style = "position:fixed; top:50vh; right: max(calc(50vw - 40vh), calc(10vw)); transform:translate(min(2.5vw,2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" data-index = "4" data-type = "button" style = "position:fixed; top:max(10vh, calc(50vh - 40vw)); right: max(calc(50vw - 40vh), calc(10vw)); transform:translate(min(2.5vw,2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" data-index = "5" data-type = "button" style = "position:fixed; bottom:max(10vh, calc(50vh - 40vw)); right: max(calc(50vw - 40vh), calc(10vw)); transform:translate(min(2.5vw,2.5vh),min(2.5vh,2.5vw))"></div>
+    <div class = "circle" data-index = "6" data-type = "button" style = "position:fixed; top:50vh; right: max(calc(50vw - 40vh), calc(10vw)); transform:translate(min(2.5vw,2.5vh),max(-2.5vh,-2.5vw))"></div>
 
-    <div class = "circle" style = "position:fixed; top:max(10vh, calc(50vh - 40vw)); left: 50vw; transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
-    <div class = "circle" style = "position:fixed; bottom:max(10vh, calc(50vh - 40vw)); left: 50vw; transform:translate(max(-2.5vw,-2.5vh),min(2.5vh,2.5vw))"></div>
+    <div class = "circle" data-index = "7" data-type = "button" style = "position:fixed; top:max(10vh, calc(50vh - 40vw)); left: 50vw; transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" data-index = "8"data-type = "button" style = "position:fixed; bottom:max(10vh, calc(50vh - 40vw)); left: 50vw; transform:translate(max(-2.5vw,-2.5vh),min(2.5vh,2.5vw))"></div>
 
 <!-- middle square -->
-    <div class = "circle" style = "position:fixed; top:max(22.5vh, calc(50vh - 27.5vw)); left: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
-    <div class = "circle" style = "position:fixed; bottom:max(22.5vh, calc(50vh - 27.5vw)); left: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(max(-2.5vw,-2.5vh),min(2.5vh,2.5vw))"></div>
-    <div class = "circle" style = "position:fixed; top:50vh; left: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" data-index = "9" data-type = "button" style = "position:fixed; top:max(22.5vh, calc(50vh - 27.5vw)); left: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" data-index = "10" data-type = "button" style = "position:fixed; bottom:max(22.5vh, calc(50vh - 27.5vw)); left: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(max(-2.5vw,-2.5vh),min(2.5vh,2.5vw))"></div>
+    <div class = "circle" data-index = "11" data-type = "button" style = "position:fixed; top:50vh; left: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
 
-    <div class = "circle" style = "position:fixed; top:max(22.5vh, calc(50vh - 27.5vw)); right: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(min(2.5vw,2.5vh),max(-2.5vh,-2.5vw))"></div>
-    <div class = "circle" style = "position:fixed; bottom:max(22.5vh, calc(50vh - 27.5vw)); right: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(min(2.5vw,2.5vh),min(2.5vh,2.5vw))"></div>
-    <div class = "circle" style = "position:fixed; top:50vh; right: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(min(2.5vw,2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" data-index = "12" data-type = "button" style = "position:fixed; top:max(22.5vh, calc(50vh - 27.5vw)); right: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(min(2.5vw,2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" data-index = "13" data-type = "button" style = "position:fixed; bottom:max(22.5vh, calc(50vh - 27.5vw)); right: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(min(2.5vw,2.5vh),min(2.5vh,2.5vw))"></div>
+    <div class = "circle" data-index = "14" data-type = "button" style = "position:fixed; top:50vh; right: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(min(2.5vw,2.5vh),max(-2.5vh,-2.5vw))"></div>
 
-    <div class = "circle" style = "position:fixed; top:max(22.5vh, calc(50vh - 27.5vw)); left: 50vw; transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
-    <div class = "circle" style = "position:fixed; bottom:max(22.5vh, calc(50vh - 27.5vw)); left: 50vw; transform:translate(max(-2.5vw,-2.5vh),min(2.5vh,2.5vw))"></div>
+    <div class = "circle" data-index = "15" data-type = "button" style = "position:fixed; top:max(22.5vh, calc(50vh - 27.5vw)); left: 50vw; transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" data-index = "16" data-type = "button" style = "position:fixed; bottom:max(22.5vh, calc(50vh - 27.5vw)); left: 50vw; transform:translate(max(-2.5vw,-2.5vh),min(2.5vh,2.5vw))"></div>
 
     <!-- inner square -->
-    <div class = "circle" style = "position:fixed; top:max(35vh, calc(50vh - 15vw)); left: max(calc(50vw - 15vh), calc(35vw)); transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
-    <div class = "circle" style = "position:fixed; bottom:max(35vh, calc(50vh - 15vw)); left: max(calc(50vw - 15vh), calc(35vw)); transform:translate(max(-2.5vw,-2.5vh),min(2.5vh,2.5vw))"></div>
-    <div class = "circle" style = "position:fixed; top:50vh; left: max(calc(50vw - 15vh), calc(35vw)); transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" data-index = "17" data-type = "button" style = "position:fixed; top:max(35vh, calc(50vh - 15vw)); left: max(calc(50vw - 15vh), calc(35vw)); transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" data-index = "18" data-type = "button"style = "position:fixed; bottom:max(35vh, calc(50vh - 15vw)); left: max(calc(50vw - 15vh), calc(35vw)); transform:translate(max(-2.5vw,-2.5vh),min(2.5vh,2.5vw))"></div>
+    <div class = "circle" data-index = "19" data-type = "button" style = "position:fixed; top:50vh; left: max(calc(50vw - 15vh), calc(35vw)); transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
 
-    <div class = "circle" style = "position:fixed; top:max(35vh, calc(50vh - 15vw)); right: max(calc(50vw - 15vh), calc(35vw)); transform:translate(min(2.5vw,2.5vh),max(-2.5vh,-2.5vw))"></div>
-    <div class = "circle" style = "position:fixed; bottom:max(35vh, calc(50vh - 15vw)); right: max(calc(50vw - 15vh), calc(35vw)); transform:translate(min(2.5vw,2.5vh),min(2.5vh,2.5vw))"></div>
-    <div class = "circle" style = "position:fixed; top:50vh; right: max(calc(50vw - 15vh), calc(35vw)); transform:translate(min(2.5vw,2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" data-index = "20" data-type = "button" style = "position:fixed; top:max(35vh, calc(50vh - 15vw)); right: max(calc(50vw - 15vh), calc(35vw)); transform:translate(min(2.5vw,2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" data-index = "21" data-type = "button" style = "position:fixed; bottom:max(35vh, calc(50vh - 15vw)); right: max(calc(50vw - 15vh), calc(35vw)); transform:translate(min(2.5vw,2.5vh),min(2.5vh,2.5vw))"></div>
+    <div class = "circle" data-index = "22" data-type = "button" style = "position:fixed; top:50vh; right: max(calc(50vw - 15vh), calc(35vw)); transform:translate(min(2.5vw,2.5vh),max(-2.5vh,-2.5vw))"></div>
 
-    <div class = "circle" style = "position:fixed; top:max(35vh, calc(50vh - 15vw)); left: 50vw; transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
-    <div class = "circle" style = "position:fixed; bottom:max(35vh, calc(50vh - 15vw)); left: 50vw; transform:translate(max(-2.5vw,-2.5vh),min(2.5vh,2.5vw))"></div>
+    <div class = "circle" data-index = "23" data-type = "button" style = "position:fixed; top:max(35vh, calc(50vh - 15vw)); left: 50vw; transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" data-index = "24" data-type = "button" style = "position:fixed; bottom:max(35vh, calc(50vh - 15vw)); left: 50vw; transform:translate(max(-2.5vw,-2.5vh),min(2.5vh,2.5vw))"></div>
 
+
+        <!-- Outer square -->
+    <div class = "piece" data-index = "1" style = "position:fixed; top:max(10vh, calc(50vh - 40vw)); left: max(calc(50vw - 40vh), calc(10vw)); transform:translate(max(-3.5vw,-3.5vh),max(-3.5vh,-3.5vw))"></div>
+    <div class = "piece" data-index = "2" style = "position:fixed; bottom:max(10vh, calc(50vh - 40vw)); left: max(calc(50vw - 40vh), calc(10vw)); transform:translate(max(-3.5vw,-3.5vh),min(3.5vh,3.5vw))"></div>
+    <div class = "piece" data-index = "3" style = "position:fixed; top:50vh; left: max(calc(50vw - 40vh), calc(10vw)); transform:translate(max(-3.5vw,-3.5vh),max(-3.5vh,-3.5vw))"></div>
+
+    <div class = "piece" data-index = "4" style = "position:fixed; top:max(10vh, calc(50vh - 40vw)); right: max(calc(50vw - 40vh), calc(10vw)); transform:translate(min(3.5vw,3.5vh),max(-3.5vh,-3.5vw))"></div>
+    <div class = "piece" data-index = "5" style = "position:fixed; bottom:max(10vh, calc(50vh - 40vw)); right: max(calc(50vw - 40vh), calc(10vw)); transform:translate(min(3.5vw,3.5vh),min(3.5vh,3.5vw))"></div>
+    <div class = "piece" data-index = "6" style = "position:fixed; top:50vh; right: max(calc(50vw - 40vh), calc(10vw)); transform:translate(min(3.5vw,3.5vh),max(-3.5vh,-3.5vw))"></div>
+
+    <div class = "piece" data-index = "7" style = "position:fixed; top:max(10vh, calc(50vh - 40vw)); left: 50vw; transform:translate(max(-3.5vw,-3.5vh),max(-3.5vh,-3.5vw))"></div>
+    <div class = "piece" data-index = "8"style = "position:fixed; bottom:max(10vh, calc(50vh - 40vw)); left: 50vw; transform:translate(max(-3.5vw,-3.5vh),min(3.5vh,3.5vw))"></div>
+
+<!-- middle square -->
+    <div class = "piece" data-index = "9"style = "position:fixed; top:max(22.5vh, calc(50vh - 27.5vw)); left: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(max(-3.5vw,-3.5vh),max(-3.5vh,-3.5vw))"></div>
+    <div class = "piece" data-index = "10"style = "position:fixed; bottom:max(22.5vh, calc(50vh - 27.5vw)); left: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(max(-3.5vw,-3.5vh),min(3.5vh,3.5vw))"></div>
+    <div class = "piece" data-index = "11"style = "position:fixed; top:50vh; left: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(max(-3.5vw,-3.5vh),max(-3.5vh,-3.5vw))"></div>
+
+    <div class = "piece" data-index = "12" style = "position:fixed; top:max(22.5vh, calc(50vh - 27.5vw)); right: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(min(3.5vw,3.5vh),max(-3.5vh,-3.5vw))"></div>
+    <div class = "piece" data-index = "13" style = "position:fixed; bottom:max(22.5vh, calc(50vh - 27.5vw)); right: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(min(3.5vw,3.5vh),min(3.5vh,3.5vw))"></div>
+    <div class = "piece" data-index = "14"style = "position:fixed; top:50vh; right: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(min(3.5vw,3.5vh),max(-3.5vh,-3.5vw))"></div>
+
+    <div class = "piece" data-index = "15"style = "position:fixed; top:max(22.5vh, calc(50vh - 27.5vw)); left: 50vw; transform:translate(max(-3.5vw,-3.5vh),max(-3.5vh,-3.5vw))"></div>
+    <div class = "piece" data-index = "16"style = "position:fixed; bottom:max(22.5vh, calc(50vh - 27.5vw)); left: 50vw; transform:translate(max(-3.5vw,-3.5vh),min(3.5vh,3.5vw))"></div>
+
+    <!-- inner square -->
+    <div class = "piece" data-index = "17" style = "position:fixed; top:max(35vh, calc(50vh - 15vw)); left: max(calc(50vw - 15vh), calc(35vw)); transform:translate(max(-3.5vw,-3.5vh),max(-3.5vh,-3.5vw))"></div>
+    <div class = "piece" data-index = "18" style = "position:fixed; bottom:max(35vh, calc(50vh - 15vw)); left: max(calc(50vw - 15vh), calc(35vw)); transform:translate(max(-3.5vw,-3.5vh),min(3.5vh,3.5vw))"></div>
+    <div class = "piece" data-index = "19" style = "position:fixed; top:50vh; left: max(calc(50vw - 15vh), calc(35vw)); transform:translate(max(-3.5vw,-3.5vh),max(-3.5vh,-3.5vw))"></div>
+
+    <div class = "piece" data-index = "20" style = "position:fixed; top:max(35vh, calc(50vh - 15vw)); right: max(calc(50vw - 15vh), calc(35vw)); transform:translate(min(3.5vw,3.5vh),max(-3.5vh,-3.5vw))"></div>
+    <div class = "piece" data-index = "21" style = "position:fixed; bottom:max(35vh, calc(50vh - 15vw)); right: max(calc(50vw - 15vh), calc(35vw)); transform:translate(min(3.5vw,3.5vh),min(3.5vh,3.5vw))"></div>
+    <div class = "piece" data-index = "22" style = "position:fixed; top:50vh; right: max(calc(50vw - 15vh), calc(35vw)); transform:translate(min(3.5vw,3.5vh),max(-3.5vh,-3.5vw))"></div>
+
+    <div class = "piece" data-index = "23" style = "position:fixed; top:max(35vh, calc(50vh - 15vw)); left: 50vw; transform:translate(max(-3.5vw,-3.5vh),max(-3.5vh,-3.5vw))"></div>
+    <div class = "piece" data-index = "24" style = "position:fixed; bottom:max(35vh, calc(50vh - 15vw)); left: 50vw; transform:translate(max(-3.5vw,-3.5vh),min(3.5vh,3.5vw))"></div>
 
     <script src="morris.js"></script>
     <script>
+
+        let turnColor = "white";
+
+        function toggleColor() {
+            if (turnColor == "white") {
+                turnColor = "black";
+            }
+            else {
+                turnColor = "white";
+            }
+        }
+
+        document.querySelectorAll('.circle[data-type="button"]').forEach(button => {
+            button.addEventListener('click', function() {
+                // Get the index or identifier for the corresponding element
+                let correspondingElementIndex = this.getAttribute('data-index');
+
+                // Find the corresponding element using the index
+                let correspondingElement = document.querySelector(`.piece[data-index="${correspondingElementIndex}"]`);
+
+                correspondingElement.style.display = "inline";
+                correspondingElement.style.backgroundColor = turnColor;
+                toggleColor();
+                // Now you can do something with the corresponding element
+                // console.log(`Button clicked. Corresponding element:`, correspondingElement);
+            });
+        });
 
     </script>
 </body>
