@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .line-horizontal-left {
+            position: fixed;
+            top: 50vh;
+            left: max(calc(50vw - 40vh), calc(10vw));
+            width: min(25vh,25vw);
+            height: 2px;
+            background-color: black;
+        }
+        .line-horizontal-right {
+            position: fixed;
+            top: 50vh;
+            right: max(calc(50vw - 40vh), calc(10vw));
+            width: min(25vh,25vw);
+            height: 2px;
+            background-color: black;
+        }
+        .line-vertical-top{
+            position: fixed;
+            top: max(calc(50vh - 40vw), calc(10vh));
+            left: 50vw;
+            height: min(25vh,25vw);
+            width: 2px;
+            background-color: black;
+        }
+        .line-vertical-bottom{
+            position: fixed;
+            bottom: max(calc(50vh - 40vw), calc(10vh));
+            left: 50vw;
+            height: min(25vh,25vw);
+            width: 2px;
+            background-color: black;
+        }
+        .square {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            background-color: lightcyan;
+            border: 2px solid black;
+            justify-content: center;
+            align-items: center;
+            transform: translate(-50%,-50%);
+        }
+        .circle {
+            position: fixed;
+            width: min(5vh,5vw);
+            height: min(5vh,5vw);
+            border-radius: 50%;
+            background-color: black;
+            /* border: 2px solid black; */
+        }
+    </style>
+</head>
+<body>
+    <div class = "square" style = "width:min(80vw,80vh);height:min(80vw,80vh);"></div>
+    <div class = "square" style = "width:min(55vw,55vh);height:min(55vw,55vh);"></div>
+    <div class = "square" style = "width:min(30vw,30vh);height:min(30vw,30vh);"></div>
+
+    <div class = "line-horizontal-left"></div>
+    <div class = "line-horizontal-right"></div>
+    <div class = "line-vertical-top"></div>
+    <div class = "line-vertical-bottom"></div>
+
+    <!-- Outer square -->
+    <div class = "circle" style = "position:fixed; top:max(10vh, calc(50vh - 40vw)); left: max(calc(50vw - 40vh), calc(10vw)); transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" style = "position:fixed; bottom:max(10vh, calc(50vh - 40vw)); left: max(calc(50vw - 40vh), calc(10vw)); transform:translate(max(-2.5vw,-2.5vh),min(2.5vh,2.5vw))"></div>
+    <div class = "circle" style = "position:fixed; top:50vh; left: max(calc(50vw - 40vh), calc(10vw)); transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
+
+    <div class = "circle" style = "position:fixed; top:max(10vh, calc(50vh - 40vw)); right: max(calc(50vw - 40vh), calc(10vw)); transform:translate(min(2.5vw,2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" style = "position:fixed; bottom:max(10vh, calc(50vh - 40vw)); right: max(calc(50vw - 40vh), calc(10vw)); transform:translate(min(2.5vw,2.5vh),min(2.5vh,2.5vw))"></div>
+    <div class = "circle" style = "position:fixed; top:50vh; right: max(calc(50vw - 40vh), calc(10vw)); transform:translate(min(2.5vw,2.5vh),max(-2.5vh,-2.5vw))"></div>
+
+    <div class = "circle" style = "position:fixed; top:max(10vh, calc(50vh - 40vw)); left: 50vw; transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" style = "position:fixed; bottom:max(10vh, calc(50vh - 40vw)); left: 50vw; transform:translate(max(-2.5vw,-2.5vh),min(2.5vh,2.5vw))"></div>
+
+<!-- middle square -->
+    <div class = "circle" style = "position:fixed; top:max(22.5vh, calc(50vh - 27.5vw)); left: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" style = "position:fixed; bottom:max(22.5vh, calc(50vh - 27.5vw)); left: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(max(-2.5vw,-2.5vh),min(2.5vh,2.5vw))"></div>
+    <div class = "circle" style = "position:fixed; top:50vh; left: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
+
+    <div class = "circle" style = "position:fixed; top:max(22.5vh, calc(50vh - 27.5vw)); right: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(min(2.5vw,2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" style = "position:fixed; bottom:max(22.5vh, calc(50vh - 27.5vw)); right: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(min(2.5vw,2.5vh),min(2.5vh,2.5vw))"></div>
+    <div class = "circle" style = "position:fixed; top:50vh; right: max(calc(50vw - 27.5vh), calc(22.5vw)); transform:translate(min(2.5vw,2.5vh),max(-2.5vh,-2.5vw))"></div>
+
+    <div class = "circle" style = "position:fixed; top:max(22.5vh, calc(50vh - 27.5vw)); left: 50vw; transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" style = "position:fixed; bottom:max(22.5vh, calc(50vh - 27.5vw)); left: 50vw; transform:translate(max(-2.5vw,-2.5vh),min(2.5vh,2.5vw))"></div>
+
+    <!-- inner square -->
+    <div class = "circle" style = "position:fixed; top:max(35vh, calc(50vh - 15vw)); left: max(calc(50vw - 15vh), calc(35vw)); transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" style = "position:fixed; bottom:max(35vh, calc(50vh - 15vw)); left: max(calc(50vw - 15vh), calc(35vw)); transform:translate(max(-2.5vw,-2.5vh),min(2.5vh,2.5vw))"></div>
+    <div class = "circle" style = "position:fixed; top:50vh; left: max(calc(50vw - 15vh), calc(35vw)); transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
+
+    <div class = "circle" style = "position:fixed; top:max(35vh, calc(50vh - 15vw)); right: max(calc(50vw - 15vh), calc(35vw)); transform:translate(min(2.5vw,2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" style = "position:fixed; bottom:max(35vh, calc(50vh - 15vw)); right: max(calc(50vw - 15vh), calc(35vw)); transform:translate(min(2.5vw,2.5vh),min(2.5vh,2.5vw))"></div>
+    <div class = "circle" style = "position:fixed; top:50vh; right: max(calc(50vw - 15vh), calc(35vw)); transform:translate(min(2.5vw,2.5vh),max(-2.5vh,-2.5vw))"></div>
+
+    <div class = "circle" style = "position:fixed; top:max(35vh, calc(50vh - 15vw)); left: 50vw; transform:translate(max(-2.5vw,-2.5vh),max(-2.5vh,-2.5vw))"></div>
+    <div class = "circle" style = "position:fixed; bottom:max(35vh, calc(50vh - 15vw)); left: 50vw; transform:translate(max(-2.5vw,-2.5vh),min(2.5vh,2.5vw))"></div>
+
+
+    <script src="morris.js"></script>
+    <script>
+
+    </script>
+</body>
+</html>
+ 
