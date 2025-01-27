@@ -189,8 +189,44 @@
         }
 
         function calcThrees(array) {
-
+            let inArray;
+            let numThrees = 0;
+            let val;
+            for (three in correctThrees) {
+                let j = 0;
+                for (let i = 0; i <3; i++) {
+                    val = three[i];
+                    inArray = false;
+                    // j = 0;
+                    while (j < array.length) {
+                        arrVal = array[j];
+                        if (arrVal == val) {
+                            inArray = true;
+                            break;
+                        }
+                        else if (arrVal > val) {
+                            break;
+                        }
+                        else {
+                            j++;
+                        }
+                    }
+                    if (!inArray) {
+                        break;
+                    }
+                }
+                if (inArray) {
+                    numThrees++;
+                }
+            }
+            return numThrees;
         }
+
+
+        //test the calc threes function
+        const array = [1,2,3];
+        let val = calcThrees(array);
+        console.log(val)
 
         const emptyButtonHandler = function() {
             let correspondingElementIndex = this.getAttribute('data-index');
@@ -209,6 +245,7 @@
                 whiteNewThrees = calcThrees(whitePositions);
                 console.log(whitePositions)
                 if (whiteNewThrees > whiteThrees) {
+                    console.log("three in a row made")
                     // removeOpponentChip(white);
                 }
             }
