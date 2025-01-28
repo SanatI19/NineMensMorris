@@ -173,11 +173,11 @@
     <div class = "piece" data-index = "23" style = "position:fixed; top:max(35vh, calc(50vh - 15vw)); left: 50vw; transform:translate(max(-4vw,-4vh),max(-4vh,-4vw))"></div>
     <div class = "piece" data-index = "24" style = "position:fixed; bottom:max(35vh, calc(50vh - 15vw)); left: 50vw; transform:translate(max(-4vw,-4vh),min(4vh,4vw))"></div>
 
-    <script src="morris.js"></script>
+    <!-- <script src="morris.js"></script> -->
     <script>
         const topText = document.getElementById("topText");
         const correctThrees = [[1,2,3],[1,4,7],[2,10,18],[3,6,8],[4,5,6],[5,13,21],[7,15,23],[8,16,24],[9,10,11],[9,12,15],[11,14,16],[12,13,14],[17,18,19],[17,20,23],[19,22,24],[20,21,22]];
-        const adjacentSpaces = [[2,7],[1,3,10],[2,8],[5,7],[4,6,13],[5,8],[1,4,15],[3,6,16],[10,15],[9,11,18],[10,16],[13,15],[12,14,21],[13,16],[7,9,12,23],[8,11,14,24],[18,23],[10,17,19],[18,24],[21,23],[13,20,22],[21,24],[15,17,20],[16,19,22]];
+        const adjacentSpaces = [[2,7],[1,3,10],[2,8],[5,7],[4,6,13],[5,8],[1,4,15],[3,6,16],[10,15],[2,9,11,18],[10,16],[13,15],[5,12,14,21],[13,16],[7,9,12,23],[8,11,14,24],[18,23],[10,17,19],[18,24],[21,23],[13,20,22],[21,24],[15,17,20],[16,19,22]];
         let turnColor = "white";
         let placements = 0;
 
@@ -278,6 +278,7 @@
             else {
                 threePieces = blackThreesIndices;
             }
+            console.log(threePieces);
             const piecesOfColor = Array.from(allPieces).filter(element => {
                 return element.style.backgroundColor === color
             })
@@ -311,36 +312,37 @@
 
             await (new Promise ((resolve) => {
                 let threePieces;
+                let positions;
                 if (color == "white") {
                     threePieces = whiteThreesIndices;
+                    positions = whitePositions;
                 }
                 else {
                     threePieces = blackThreesIndices;
+                    positions = blackPositions;
                 }
+                console.log(positions);
                 const allPieces = document.querySelectorAll('.piece');
                 const piecesOfColor = Array.from(allPieces).filter(element => {
                     return element.style.backgroundColor === color
                 })
-                const allowablePiecesOfColor = Array.from(piecesOfColor).filter(element => !threePieces.includes(Number(element.dataset.index)))
+                const piecesOfColorVisible = Array.from(piecesOfColor).filter(element => positions.includes(Number(element.dataset.index)));
+                // console.log(piecesOfColor.length);
+                // console.log(piecesOfColorVisible.length);
+                const allowablePiecesOfColor = Array.from(piecesOfColorVisible).filter(element => !threePieces.includes(Number(element.dataset.index)))
                 console.log(threePieces);
 
-                console.log(allowablePiecesOfColor.length);
+                // console.log(allowablePiecesOfColor.length);
                 if (allowablePiecesOfColor.length == 0) {
-                    resolve();
+                    piecesOfColorVisible.forEach(button => {
+                        button._handler = removeChipButtonHandler(resolve,color);
+                        button.addEventListener('click', button._handler);
+                    })
                 }
                 else {
                     allowablePiecesOfColor.forEach(button => {
                         button._handler = removeChipButtonHandler(resolve, color);
-                        button.addEventListener('click',button._handler);
-                        // button.addEventListener('click', removeChipButtonHandler(resolve), {once:true}
-                            // document.querySelectorAll('.piece').forEach(btn => {
-                            //     btn.removeEventListener('click', removeChipButtonHandler);
-                            // });
-                            // this.style.display = "none";
-                            // resolve();
-                            // console.log('button pressed');
-                        // );
-                        // console.log('added button event listener')
+                        button.addEventListener('click', button._handler);
                     })
                 }
             }))
@@ -401,21 +403,30 @@
                     console.log(blackPositions)
                     if (blackNewThrees > blackThrees) {
                         console.log("three in a row made by black")
-                        // this needs to be async
+                        removeEmptyButtonListeners();
                         await awaitRemoval("white");
+                        addEmptyButtonListeners();
                     }
                     else {
                         // resolve();
                     }
                 }
             // }));
-            console.log('resolved,continuing');
+            // console.log('resolved,continuing');
             toggleColor();
             topText.innerHTML = turnColor.charAt(0).toUpperCase()+turnColor.slice(1) + ", please place a piece"
             placements++;
             if (placements >= 18) {
                 removeEmptyButtonListeners();
-                addSliding(white);
+                toggleColor();
+                let victory = checkVictory();
+                if (victory) {
+                    displayVictory();
+                }
+                else {
+                    toggleColor();
+                    addSliding();
+                }
             }
         }
 
@@ -433,7 +444,110 @@
             })
         }
 
-        function addSliding(color) {
+        const slideButtonHandler = function() {
+            console.log("whitebuttonpressed")
+            removeSliding();
+            validSpacesAdd(Number(this.dataset.index));
+        }
+
+        const moveButtonHandler = (index) => {
+            return async function () {
+                document.querySelector(`.piece[data-index="${index}"]`).style.display = "none";
+                let pressedIndex = this.dataset.index;
+                document.querySelector(`.piece[data-index="${pressedIndex}"]`).style.display = "inline";
+                document.querySelector(`.piece[data-index="${pressedIndex}"]`).style.backgroundColor = turnColor;
+
+                document.querySelectorAll('.circle').forEach(button => {
+                    button.removeEventListener('click', button._handler);
+                });
+
+                if (turnColor == "white") {
+                    whiteThrees = calcThrees(whitePositions, "white")
+                    whitePositions.splice(whitePositions.indexOf(Number(index)),1)
+                    whitePositions.push(Number(pressedIndex));
+                    whitePositions = sortAdditionArray(whitePositions);
+                    whiteNewThrees = calcThrees(whitePositions, "white");
+                    if (whiteNewThrees > whiteThrees) {
+                        // removeEmptyButtonListeners();
+                        await awaitRemoval("black");
+                        // addEmptyButtonListeners();
+                    }
+
+                }
+                else {
+                    blackThrees = calcThrees(blackPositions, "black")
+                    blackPositions.splice(blackPositions.indexOf(Number(index)),1)
+                    blackPositions.push(Number(pressedIndex));
+                    blackPositions = sortAdditionArray(blackPositions);
+                    blackNewThrees = calcThrees(blackPositions, "black");
+                    if (blackNewThrees > blackThrees) {
+                        // removeMove();
+                        // removeEmptyButtonListeners();
+                        await awaitRemoval("white");
+                        // addEmptyButtonListeners();
+                    }
+
+                }
+                let victory = false;
+                victory = checkVictory();
+                if (victory) {
+                    displayVictory();
+                }
+                else {
+                    toggleColor();
+                    addSliding();
+                }
+            }
+        }
+
+        function checkDeadlocked(color) {
+            let winner;
+            let loser;
+            let total = [...whitePositions,...blackPositions];
+            if (color == "white") {
+                winner = whitePositions;
+                loser = blackPositions;
+            }
+            else {
+                loser = whitePositions;
+                winner = blackPositions;
+            }
+            let deadlocked = true;
+            for (x of loser) {
+                for (y of adjacentSpaces[x-1]) {
+                    if (!total.includes(y)) {
+                        return false;
+                    }
+                }
+            }
+            return deadlocked
+        }
+
+        function checkVictory() {
+            if (turnColor == "white") {
+                if (blackPositions.length <3) {
+                    return true
+                }
+                
+            }
+            else {
+                if (whitePositions.length <3) {
+                    return true
+                }
+            }
+            return checkDeadlocked(turnColor)
+        }
+
+        function displayVictory() {
+            topText.innerHTML = turnColor.charAt(0).toUpperCase() + turnColor.slice(1) + " wins!!";
+        }
+
+        function addSliding() {
+            let color = turnColor;
+            topText.innerHTML = color.charAt(0).toUpperCase() + color.slice(1) + ", please move one of your pieces to an adjacent spot.";
+            if ((turnColor == "white" && whitePositions.length <4) || (turnColor == "black" && blackPositions.length <4)) {
+                topText.innerHTML = color.charAt(0).toUpperCase() + color.slice(1) + ", please move one of your pieces to ANY empty spot.";
+            }
             const pieces = document.querySelectorAll('.piece');
             const coloredPieces = Array.from(pieces).filter(element => element.style.backgroundColor === color);
             coloredPieces.forEach(button => {
@@ -442,11 +556,41 @@
         }
 
         function validSpacesAdd(index) {
-            const adjacent = adjacentSpaces(index-1);
-            const spaces = document.querySelectorAll('.circle');
-            const nearSpaces = Array.from(spaces).filter(adjacent.includes(spaces.dataset.index));
-            // const emptyNearSpaces = Array.from(nearSpaces).filter()
+            let spaces;
+            let nearSpaces;
+            let emptyNearSpacesBlack;
+            let emptyNearSpaces;
+            if ((turnColor == "white" && whitePositions.length <4) || (turnColor == "black" && blackPositions.length <4)) {
+                nearSpaces = document.querySelectorAll('.circle');
+                emptyNearSpacesBlack = Array.from(nearSpaces).filter(element => !blackPositions.includes(Number(element.dataset.index)));
+                emptyNearSpaces = Array.from(emptyNearSpacesBlack).filter(element => !whitePositions.includes(Number(element.dataset.index)));
+            }
+            else {
+                console.log(index);
+                const adjacent = adjacentSpaces[index-1];
+                spaces = document.querySelectorAll('.circle');
+                nearSpaces = Array.from(spaces).filter(element => adjacent.includes(Number(element.dataset.index)));
+                emptyNearSpacesBlack = Array.from(nearSpaces).filter(element => !blackPositions.includes(Number(element.dataset.index)));
+                emptyNearSpaces = Array.from(emptyNearSpacesBlack).filter(element => !whitePositions.includes(Number(element.dataset.index)));
+            }
+            console.log(emptyNearSpaces.length);
+            if (emptyNearSpaces.length == 0) {
+                addSliding();
+            }
+            else {
+            emptyNearSpaces.forEach(button => {
+                button._handler = moveButtonHandler(index);
+                button.addEventListener('click', button._handler);
+            })
+            }
         }
+
+        function removeMove() {
+            document.querySelectorAll('.circle').forEach(button => {
+                button.removeEventListener('click', moveButtonHandler);
+            })
+        }
+        // validSpacesAdd(1);
 
         function removeSliding() {
             document.querySelectorAll('.piece').forEach(button => {
