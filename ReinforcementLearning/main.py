@@ -57,10 +57,13 @@ def game_loop():
             if env.count_occupied_spaces(state) != env.count_occupied_spaces(next_state):
                 change_turn = turn_count
             
-            if change_turn + 9 <= turn_count:
+            if change_turn + 18 <= turn_count:
                 stalemate = True
+            else:
+                stalemate = False
 
-            
+            # NEED TO ENSURE THAT THE STATES ADD THE NEXT_STATE THAT GETS CHOSEN, AND NEED TO ENSURE THAT IF THE NEXT STATE IS A REMOVAL THEN THE 
+
             # Calculate reward (can be adjusted based on the result of the transition)
             # Example: positive reward for continuing or completing the move
 
