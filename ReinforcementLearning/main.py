@@ -7,10 +7,10 @@ from q_learning import QLearning
 def game_loop():
     # Initialize the game environment and Q-learning agent
     env = GameEnv()
-    white_agent = QLearning(alpha=0.1, gamma=0.9, epsilon=0.2)
-    black_agent = QLearning(alpha=0.1, gamma=0.9, epsilon=0.2)
+    white_agent = QLearning(alpha=0.1, gamma=0.9, epsilon=0.9)
+    black_agent = QLearning(alpha=0.1, gamma=0.9, epsilon=0.9)
     
-    total_episodes = 1
+    total_episodes = 5
 
     all_boards = []
     all_turns_and_colors = []
@@ -33,6 +33,11 @@ def game_loop():
         while turn_count < 1000 and not done:  # Limit to 1000 steps # THIS NEEDS TO BE CHANGED TO WHILE NOT DONEs
             # Get the valid next states (representing all possible state transitions)
             valid_future_states = env.get_valid_future_states(state)
+
+            if len(valid_future_states) == 0:
+                print(state)
+                print(turn_count)
+            # print(len(valid_future_states))
             episode_states.append(list(state[0]))
             if (not state[3]):
                 turn_count += 1
@@ -42,7 +47,7 @@ def game_loop():
             else:
                 agent = black_agent
 
-            episode_turns_colors.append([state[2],turn_count,state[3]])
+            episode_turns_colors.append([state[2],turn_count,state[3],state[1]])
             # Choose a next state (in Q-learning, we treat the next state as the "action")
             next_state = agent.choose_future_state(state, valid_future_states)
             
@@ -89,6 +94,7 @@ def game_loop():
 
             # Sleep to slow down for readability (optional)
             # time.sleep(0.01)
+        episode_states.append(state[0])
         all_boards.append(episode_states)
         all_turns_and_colors.append(episode_turns_colors)
         # Once done, save the trained Q-table (optional)

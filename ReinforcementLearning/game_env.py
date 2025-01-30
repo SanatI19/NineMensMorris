@@ -149,6 +149,9 @@ class GameEnv:
                                 next_state = (tuple(next_board), phase, next_color, next_condition_met)
 
                                 possible_future_states.append(next_state)
+                                next_board[new_position] = None
+
+                                
                     else:
                         for new_position in ADJACENT_SPACES[position]:
                             if board[new_position] is None:
@@ -212,16 +215,51 @@ class GameEnv:
         else:
             white_positions = self.board_to_indices(board,'W')
             black_positions = self.board_to_indices(board,'B')
+            if (phase == 2):
+                if len(white_positions) < 3:
+                    return 'W'
+                if len(black_positions) < 3:
+                    return 'B'
+            
             if (stalemate):
                 if len(white_positions) == 3 or len(black_positions) == 3:
+                    print("stalemate win")
                     if len(white_positions) > len(black_positions):
                         return 'W'
                     elif len(black_positions) > len(white_positions):
                         return 'B'
                     else:
                         return 'D'
-                    
-        return '0'
+                # print("checking deadlock")
+        return self.checkDeadlock(white_positions,black_positions, self.toggle_color(color),state)        
+        # return '0'
+
+    def checkDeadlock(self, white_positions, black_positions, color, state):
+        # print('checking deadlock')
+        if state[1] == 1:
+            # print('phase 1')
+            return '0'
+        else:
+            # print('possible deadlock')
+            total = white_positions+ black_positions
+            # print(color)
+            if color == 'W':
+                winner = white_positions
+                loser = black_positions        
+            else:
+                loser = white_positions
+                winner = black_positions
+            deadlocked = True
+            for x in loser:
+                for y in ADJACENT_SPACES[x]:
+                    if (y not in total):
+                        # print('not in total')
+                        return '0'
+            print("deadlock win")
+            if color == "W":
+                return 'W'
+            else:
+                return 'B' 
 
 
     def count_occupied_spaces(self,state):

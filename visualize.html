@@ -201,12 +201,12 @@
                 csvText = csvText.replace(/"/g,'');
                 csvText = csvText.replace(/\r/g,'');
                 csvText = csvText.replace(/ /g, '');
+                // csvArray = csvText.match(/\(([^)]+)\)/g).map(s => s.slice(1, -1));
                 csvArray = csvText.trim().split("\n").map(row => row.split(","));
                 // console.log(rows)
                 // console.log(csvArray);  // CSV data is now stored as a 2D array
             })
             .catch(error => console.error("Error loading CSV:", error));
-
         let states    
         // Example usage after loading
         function processCSV() {
@@ -214,6 +214,7 @@
             console.log("CSV not loaded yet");
         } else {
             console.log("Using CSV Data:", csvArray);
+            console.log(csvArray.length);
             states = csvArray
             console.log(states[1])
             console.log(states[1][23])

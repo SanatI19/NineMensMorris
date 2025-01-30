@@ -1,7 +1,7 @@
 import random
 
 class QLearning:
-    def __init__(self, alpha=0.1, gamma=0.9, epsilon=0.1):
+    def __init__(self, alpha, gamma, epsilon):
         self.alpha = alpha        # Learning rate
         self.gamma = gamma        # Discount factor
         self.epsilon = epsilon    # Exploration rate (ε-greedy)
