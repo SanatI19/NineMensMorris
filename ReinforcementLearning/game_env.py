@@ -16,7 +16,6 @@ for i in range(len(ADJACENT_SPACES)):
         ADJACENT_SPACES[i][j] = ADJACENT_SPACES[i][j]-1
 
 
-#NEED TO FIX STATE DEFINITION, ADD COLOR OF TURN INSTEAD OF COUNTER, AND ADD PHASE OF GAME (1 OR 2)
 
 class GameEnv:
     def __init__(self, num_positions=NUM_POSITIONS):
@@ -27,41 +26,44 @@ class GameEnv:
         # Starting game state: empty board, turn = 0 (even for 'X', odd for 'O'), no special conditions
         self.board = [None] * self.num_positions  # None means unoccupied  # Condition to unlock special actions
         self.phase = 1
-        self.color = 'B'
+        self.color = 'W'
         self.condition_met = False
         return (tuple(self.board),self.phase,self.color,self.condition_met)
 
     def calc_three_in_a_row(self,board,color):
 
         desiredPositions = self.board_to_indices(board,color)
-
-        count = 0
-        threes_indices = []
-        for three in THREES:
-            j = 0
-            for i in range(3):
-                val = three[i]
-                inArray = False
-                while (j < desiredPositions.length):
-                    arrVal = desiredPositions[j]
-                    if (arrVal == val):
-                        inArray = True
-                        break
-                    elif arrVal > val:
-                        break
-                    else:
-                        j += 1
-                
+        # print(desiredPositions)
+        if len(desiredPositions) < 3:
+            return 0, []
+        else:
+            count = 0
+            threes_indices = []
+            for three in THREES:
+                j = 0
+                for i in range(3):
+                    val = three[i]
+                    inArray = False
+                    while (j < len(desiredPositions)):
+                        arrVal = desiredPositions[j]
+                        if (arrVal == val):
+                            inArray = True
+                            break
+                        elif arrVal > val:
+                            break
+                        else:
+                            j += 1
+                    
                     if not inArray:
                         break
                 if (inArray):
                     count += 1
                     for x in three:
                         threes_indices.append(x)
+            # print("Count, indices: ", [count,threes_indices])
+            return [count,threes_indices]
 
-        return [count,threes_indices]
-
-    def board_to_indices(board,desired):
+    def board_to_indices(self,board,desired):
         positions = []
         for i in range(len(board)):
             if board[i] == desired:
@@ -80,7 +82,7 @@ class GameEnv:
         else:
             return valid_positions
 
-    def toggle_color(color):
+    def toggle_color(self,color):
         if (color == 'W'):
             return 'B'
         else:
@@ -106,19 +108,23 @@ class GameEnv:
                     possible_future_states.append(next_state)
 
         elif (phase == 1):
+            # print('Phase 1')
             for position in range(self.num_positions):
                 if board[position] is None:
+                    next_condition_met = condition_met
                     next_board = list(board)
                     next_board[position] = color
                     next_color = color
                     [curr_threes, x] = self.calc_three_in_a_row(board,color)
                     [future_threes,y] = self.calc_three_in_a_row(next_board,color)
+                    # print('Curr threes: ', curr_threes)
+                    # print('Future threes: ', future_threes)
                     if (future_threes > curr_threes):
-                        condition_met = True
+                        next_condition_met = True
                     else:
                         next_color = self.toggle_color(color)
                     
-                    next_state = (tuple(next_board), phase, next_color, condition_met)
+                    next_state = (tuple(next_board), phase, next_color, next_condition_met)
 
                     possible_future_states.append(next_state)
         else:
@@ -130,55 +136,101 @@ class GameEnv:
                     if num_colored_pieces < 4:
                         for new_position in range(self.num_positions):
                             if board[new_position] is None:
+                                next_condition_met = condition_met
                                 next_board[new_position] = color
                                 next_color = color
                                 [curr_threes, x] = self.calc_three_in_a_row(board,color)
                                 [future_threes,y] = self.calc_three_in_a_row(next_board,color)
                                 if (future_threes > curr_threes):
-                                    condition_met = True
+                                    next_condition_met = True
                                 else:
                                     next_color = self.toggle_color(color)
                                 
-                                next_state = (tuple(next_board), phase, next_color, condition_met)
+                                next_state = (tuple(next_board), phase, next_color, next_condition_met)
 
                                 possible_future_states.append(next_state)
                     else:
                         for new_position in ADJACENT_SPACES[position]:
                             if board[new_position] is None:
+                                next_condition_met = condition_met                                
                                 next_board[new_position] = color
                                 next_color = color
                                 [curr_threes, x] = self.calc_three_in_a_row(board,color)
                                 [future_threes,y] = self.calc_three_in_a_row(next_board,color)
                                 if (future_threes > curr_threes):
-                                    condition_met = True
+                                    next_condition_met = True
                                 else:
                                     next_color = self.toggle_color(color)
                                 
-                                next_state = (tuple(next_board), phase, next_color, condition_met)
+                                next_state = (tuple(next_board), phase, next_color, next_condition_met)
 
                                 possible_future_states.append(next_state)
+                                next_board[new_position] = None
 
 
         return possible_future_states
 
-    def calc_rewards(self,state,next_state):
-        board = state[0]
-        next_board = next_state[0]
-        reward = 1
-        white_reward = 1
-        black_reward = 1
+    def calc_rewards(self,state,next_state,stalemate):
+        board, phase, color, condition_met = state
+        next_board, next_phase, next_color, next_condition_met = next_state
+        # board = state[0]
+        # next_board = next_state[0]
+        # reward = 1
+        winner = self.check_winner(next_state,stalemate)
         win_condition = False
+        white_reward = 0
+        black_reward = 0
+        if winner == 'D':
+            win_condition = True
+            print('Draw')
+        elif winner == 'W':
+            win_condition = True
+            print('White wins')
+            white_reward = 3
+            black_reward = -3
+        elif winner == 'B':
+            win_condition = True
+            print('Black wins')
+            white_reward = -3
+            black_reward = 3
+        elif winner == '0':
+            if (next_state[3]):
+                if (next_color == 'W'):
+                    white_reward = 0.5
+                    black_reward = -0.5
+                else:
+                    white_reward = -0.5
+                    black_reward = 0.5
+
         return white_reward, black_reward, win_condition
     
-    def check_win_condition(self,state):
-        board, phase, color, win_condition = state
-        if win_condition:
-            return False # returns false if in removal phase, since this means that the game is not over
+    def check_winner(self,state,stalemate):
+        board, phase, color, condition_met = state
+        # NEED TO CHECK FOR STUCK CONDITION
+        if condition_met:
+            return '0' # returns false if in removal phase, since this means that the game is not over
         else:
-            white_positions = self.board_to_indices[board,'W']
-            black_positions = self.board_to_indices[board,'B']
+            white_positions = self.board_to_indices(board,'W')
+            black_positions = self.board_to_indices(board,'B')
+            if (stalemate):
+                if len(white_positions) == 3 or len(black_positions) == 3:
+                    if len(white_positions) > len(black_positions):
+                        return 'W'
+                    elif len(black_positions) > len(white_positions):
+                        return 'B'
+                    else:
+                        return 'D'
+                    
+        return '0'
 
 
+    def count_occupied_spaces(self,state):
+        board = state[0]
+        count = 0
+        for position in range(len(board)):
+            if board[position] is not None:
+                count += 1
+        return count
     # def apply_action(self, state, action):
     #     """
     #     Apply action to state and return the new state.
