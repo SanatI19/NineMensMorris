@@ -7,10 +7,11 @@ from q_learning import QLearning
 def game_loop():
     # Initialize the game environment and Q-learning agent
     env = GameEnv()
-    white_agent = QLearning(alpha=0.1, gamma=0.9, epsilon=0.9)
-    black_agent = QLearning(alpha=0.1, gamma=0.9, epsilon=0.9)
+    epsilon_val = load_epsilon()
+    white_agent = QLearning(alpha=0.2, gamma=0.9, epsilon=epsilon_val, min_epsilon=0.1,decay_rate=0.995, pickle_file="white_q_table.pkl")
+    black_agent = QLearning(alpha=0.2, gamma=0.9, epsilon=epsilon_val,min_epsilon=0.1,decay_rate=0.995, pickle_file="black_q_table.pkl")
     
-    total_episodes = 5
+    total_episodes = 1000
 
     all_boards = []
     all_turns_and_colors = []
@@ -80,8 +81,9 @@ def game_loop():
 
             # REWARD IS MOST IMPORTANT, THIS IS WHERE I INTEGRATE THE REWARD VALUE
             # Update the Q-value for the current state to encourage correct actions
-            white_agent.update_q_value(state, white_reward, next_state)
-            black_agent.update_q_value(state, black_reward, next_state)
+            valid_actions_next_state = env.get_valid_future_states(next_state)
+            white_agent.update_q_value(state, 10*white_reward, next_state, valid_actions_next_state)
+            black_agent.update_q_value(state, 10*black_reward, next_state, valid_actions_next_state)
 
 
             # Move to the next state
@@ -94,9 +96,13 @@ def game_loop():
 
             # Sleep to slow down for readability (optional)
             # time.sleep(0.01)
-        episode_states.append(state[0])
+        episode_states.append(list(state[0]))
         all_boards.append(episode_states)
         all_turns_and_colors.append(episode_turns_colors)
+        white_agent.update_epsilon()
+        black_agent.update_epsilon()
+        # print(turn_count)
+
         # Once done, save the trained Q-table (optional)
         # with open('trained_q_table.pkl', 'wb') as f:
         #     pickle.dump(agent.q_table, f)
@@ -104,6 +110,7 @@ def game_loop():
     save_states_to_csv(all_turns_and_colors,'turns_and_colors.csv')
     save_q_table(white_agent.q_table, "white_q_table.pkl")
     save_q_table(black_agent.q_table, "black_q_table.pkl")
+    save_epsilon(white_agent.epsilon)
     print('done with run through')
 
 
@@ -117,7 +124,7 @@ def save_states_to_csv(all_states, filename):
     max_length = max(len(episode) for episode in all_states)
 
     # Pad shorter episodes with empty values
-    padded_states = [episode + [''] * (max_length - len(episode)) for episode in all_states]
+    padded_states = [episode + ['[]'] * (max_length - len(episode)) for episode in all_states]
 
 
     transposed_states = list(zip(*padded_states))
@@ -126,10 +133,30 @@ def save_states_to_csv(all_states, filename):
         writer = csv.writer(file)
         
         # If needed, you can write a header row to describe the episode columns
-        writer.writerow([f"Episode {i+1}" for i in range(len(transposed_states))])
+        # writer.writerow([f"Episode {i+1}" for i in range(len(transposed_states))])
 
         # Write each row of states (each state in a row is across episodes)
         writer.writerows(transposed_states)
+
+def load_epsilon(filename="epsilon.txt"):
+    try:
+        with open(filename, 'r') as file:
+            epsilon = float(file.read())  # Read the value as a float
+            return epsilon
+    except FileNotFoundError:
+        return 0.1  # Default epsilon if the file doesn't exist
+
+def save_epsilon(epsilon, filename="epsilon.txt"):
+    with open(filename, 'w') as file:
+        file.write(str(epsilon))  # Overwrite the file with the new epsilon value
+
+# Loading and saving epsilon
+# epsilon = load_epsilon()  # Load epsilon from file
+# print(f"Loaded epsilon: {epsilon}")
+
+# After training, save epsilon back to the file
+# new_epsilon = epsilon * 0.99  # Example decay
+# save_epsilon(new_epsilon)  # Overwrite the file with the new epsilon value
 
 
 if __name__ == "__main__":

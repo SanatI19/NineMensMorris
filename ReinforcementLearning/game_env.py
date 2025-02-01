@@ -121,6 +121,8 @@ class GameEnv:
                     # print('Future threes: ', future_threes)
                     if (future_threes > curr_threes):
                         next_condition_met = True
+                    elif (future_threes == curr_threes) and x != y:
+                        next_condition_met = True
                     else:
                         next_color = self.toggle_color(color)
                     
@@ -143,6 +145,8 @@ class GameEnv:
                                 [future_threes,y] = self.calc_three_in_a_row(next_board,color)
                                 if (future_threes > curr_threes):
                                     next_condition_met = True
+                                elif (future_threes == curr_threes) and x != y:
+                                    next_condition_met = True
                                 else:
                                     next_color = self.toggle_color(color)
                                 
@@ -161,6 +165,8 @@ class GameEnv:
                                 [curr_threes, x] = self.calc_three_in_a_row(board,color)
                                 [future_threes,y] = self.calc_three_in_a_row(next_board,color)
                                 if (future_threes > curr_threes):
+                                    next_condition_met = True
+                                elif (future_threes == curr_threes) and x != y:
                                     next_condition_met = True
                                 else:
                                     next_color = self.toggle_color(color)
@@ -185,25 +191,31 @@ class GameEnv:
         black_reward = 0
         if winner == 'D':
             win_condition = True
-            print('Draw')
+            # print('Draw')
         elif winner == 'W':
             win_condition = True
-            print('White wins')
-            white_reward = 3
-            black_reward = -3
+            # print('White wins')
+            white_reward = 5
+            black_reward = -5
         elif winner == 'B':
             win_condition = True
-            print('Black wins')
-            white_reward = -3
-            black_reward = 3
+            # print('Black wins')
+            white_reward = -5
+            black_reward = 5
         elif winner == '0':
             if (next_state[3]):
                 if (next_color == 'W'):
-                    white_reward = 0.5
-                    black_reward = -0.5
+                    white_reward = 1
+                    black_reward = -1
                 else:
-                    white_reward = -0.5
-                    black_reward = 0.5
+                    white_reward = -1
+                    black_reward = 1
+            else: 
+                if (not next_state[3]):
+                    if (color == 'W'):
+                        white_reward = -0.1
+                    else:
+                        black_reward = -0.1
 
         return white_reward, black_reward, win_condition
     
@@ -223,7 +235,7 @@ class GameEnv:
             
             if (stalemate):
                 if len(white_positions) == 3 or len(black_positions) == 3:
-                    print("stalemate win")
+                    # print("stalemate win")
                     if len(white_positions) > len(black_positions):
                         return 'W'
                     elif len(black_positions) > len(white_positions):
@@ -255,7 +267,7 @@ class GameEnv:
                     if (y not in total):
                         # print('not in total')
                         return '0'
-            print("deadlock win")
+            # print("deadlock win")
             if color == "W":
                 return 'W'
             else:

@@ -197,12 +197,22 @@
         fetch("game_states.csv")
             .then(response => response.text())
             .then(csvText => {
-                csvText = csvText.replace(/[\(\)\[\]]/g, '');  // Remove parentheses and brackets
-                csvText = csvText.replace(/"/g,'');
+                // csvText = csvText.replace(/[\(\)\[\]]/g, '');  // Remove parentheses and brackets
+                // csvText = csvText.replace(/"/g,'');
                 csvText = csvText.replace(/\r/g,'');
                 csvText = csvText.replace(/ /g, '');
                 // csvArray = csvText.match(/\(([^)]+)\)/g).map(s => s.slice(1, -1));
-                csvArray = csvText.trim().split("\n").map(row => row.split(","));
+                csvArray = csvText.trim().split("\n").map(row => 
+                    row.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g).map(cell => {
+                        let cleanedCell = cell.replace(/^"|"$/g, ''); // Remove surrounding quotes
+                        return cleanedCell.startsWith("[") && cleanedCell.endsWith("]") 
+                            ? convertRowsToArray(cleanedCell) // Convert string arrays to real arrays
+                            : cleanedCell;
+                    }) // Otherwise, return as normal
+                    // cell.replace(/^"|"$/g, ''))
+
+                    // row.split(","));
+                );
                 // console.log(rows)
                 // console.log(csvArray);  // CSV data is now stored as a 2D array
             })
@@ -215,23 +225,34 @@
         } else {
             console.log("Using CSV Data:", csvArray);
             console.log(csvArray.length);
-            states = csvArray
-            console.log(states[1])
-            console.log(states[1][23])
+            console.log(csvArray[csvArray.length-1]);
+            let desiredGame = 997;
+            states = csvArray.map(row => row[desiredGame])
+            // let column = array2D.map(row => row[columnIndex])
+            console.log(states)
+            // console.log(states[1][23])
             beginSimulation()
         }
         }
 
+        function convertRowsToArray(str) {
+            return str
+                .replace(/^\[|\]$/g, '') // Remove square brackets
+                .split(/\s*,\s*/)         // Split by commas, ignoring spaces
+                .map(val => val.trim());  // Trim each value (optional)
+        }
+        
         // Call processCSV() after some delay to ensure CSV is loaded
         setTimeout(processCSV, 1000);
 
         // console.log(csvArray)
         
-        let index = 1;
+        let index = 0;
         let max_index = 1000;
         function beginSimulation(){
-            index = 1
-            max_index = csvArray.length - 1
+            index = 0
+            max_index = states.length - 1
+            console.log(max_index)
             forwardButton.disabled = false
             placeBoard(csvArray[index])
         }
@@ -271,8 +292,10 @@
             index++;
             removeAllPieces();
             placeBoard(states[index]);
-
-            if (index >= max_index) {
+            if (index>= max_index) {
+                forwardButton.disabled = true;
+            }
+            else if(states[index+1].length <24){
                 forwardButton.disabled = true;
             }
         })

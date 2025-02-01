@@ -475,6 +475,7 @@
                     whitePositions.splice(whitePositions.indexOf(Number(index)),1)
                     whitePositions.push(Number(pressedIndex));
                     whitePositions = sortAdditionArray(whitePositions);
+                    console.log(whitePositions)
                     whiteNewThrees = calcThrees(whitePositions, "white");
                     if (whiteNewThrees > whiteThrees) {
                         // removeEmptyButtonListeners();
@@ -488,6 +489,7 @@
                     blackPositions.splice(blackPositions.indexOf(Number(index)),1)
                     blackPositions.push(Number(pressedIndex));
                     blackPositions = sortAdditionArray(blackPositions);
+                    console.log(blackPositions)
                     blackNewThrees = calcThrees(blackPositions, "black");
                     if (blackNewThrees > blackThrees) {
                         // removeMove();
@@ -498,7 +500,7 @@
 
                 }
                 let victory = false;
-                placement++;
+                placements++;
                 victory = checkVictory();
                 if (victory) {
                     displayVictory();
@@ -544,7 +546,7 @@
                     return true
                 }
             }
-            if (changeTurn + 9 >= positions) {
+            if (changeTurn + 18 <= placements) {
                 return true
             }
             return checkDeadlocked(turnColor)
