@@ -23,7 +23,7 @@ import pandas as pd
 
 
 
-with open("black_q_table.pkl", "rb") as f:
+with open("white_q_table.pkl", "rb") as f:
     q_table = pickle.load(f)
 
 
@@ -35,9 +35,10 @@ first_key, first_value = next(iter(q_table.items()))
 # print(data)  # Prints the contents
 first_entry = list(q_table.items())
 # print(first_entry[0][0])
-for i in range(len(first_entry)):
-    print(first_entry[i][1])
+# for i in range(len(first_entry)):
+#     print(first_entry[i][1])
 print(len(first_entry))
+print(first_entry[10000:10010][1])
 # print(f"First entry: {first_entry[0]}: {first_entry[1]}")
 position = (('W', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None),1,'B',False)
 # print(position)
